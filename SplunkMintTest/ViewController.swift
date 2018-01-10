@@ -7,14 +7,36 @@
 //
 
 import UIKit
+import SplunkMint;
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        Mint.sharedInstance().initAndStartSession(withAPIKey: "9d23e112")
     }
 
+    @IBAction func transactionPressed(_ sender: Any) {
+        
+        let transactionName:String = "TransactionName"
+        var transactionID:String;
+        
+        transactionID = Mint.sharedInstance().transactionStart(transactionName)
+        Mint.sharedInstance().transactionStop(transactionID)
+        
+        transactionID = Mint.sharedInstance().transactionStart(transactionName)
+        Mint.sharedInstance().transactionCancel(transactionID, reason: "reason")
+                
+        print("Transaction Logged ");
+        
+   }
+    
+    @IBAction func CrashPressed(_ sender: Any) {
+        
+        fatalError()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
