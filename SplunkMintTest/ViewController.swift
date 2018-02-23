@@ -13,10 +13,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //let key:String = "3fca408d"//BGL test stack key
+        let key:String = "322f3256"//BGL prod stack key
+
         
-        Mint.sharedInstance().initAndStartSession(withAPIKey: "9d23e112")
+        Mint.sharedInstance().initAndStartSession(withAPIKey: key)
+        viewLabel.text = "Splunk CtM Key: " + key
     }
 
+    @IBOutlet weak var viewLabel: UILabel!
+    
     @IBAction func transactionPressed(_ sender: Any) {
         
         let transactionName:String = "TransactionName"
@@ -36,6 +43,7 @@ class ViewController: UIViewController {
         
         fatalError()
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
